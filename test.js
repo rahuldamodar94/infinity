@@ -58,3 +58,10 @@ tronWeb.trx.sendTransaction(tronWeb.address.toHex("TAHfJybMZuDZ1Cv7pyzad9G4AXufj
 }).catch(err => {
     console.log(err.message)
 })
+
+const app = async () => {
+    const userBalance = await tronWeb.trx.getBalance(tronWeb.address.toHex("TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV"));
+    console.log(`User's balance is: ${ userBalance/1000000 }`);
+};
+
+app();
