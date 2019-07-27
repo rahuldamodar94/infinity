@@ -2,86 +2,156 @@ const hdkey = require('hdkey')
 const wif = require('wif')
 const ecc = require('eosjs-ecc')
 const bip39 = require('bip39')
-// const mnemonic = 'real flame win provide layer trigger soda erode upset rate beef wrist fame design merit'
-const mnemonic = bip39.generateMnemonic()
-const seed = bip39.mnemonicToSeedHex(mnemonic)
-const master = hdkey.fromMasterSeed(Buffer.from(seed, 'hex'))
-const node = master.derive("m/44'/194'/0'/0/0")
-console.log("publicKey: "+ecc.PublicKey(node._publicKey).toString())
-console.log("privateKey: "+wif.encode(128, node._privateKey, false))
 
-// const fetch = require('node-fetch');
-// const { JsonRpc } = require('eosjs');
+EosApi = require('eosjs-api')
 
-//eospaceioeos
+options = {
+    httpEndpoint: 'https://jungle2.cryptolions.io:443',
+    verbose: false,
+    fetchConfiguration: {}
+}
 
-// var balance = fucntion(account_name) {
-//     // Instantiate a new JsonRpc object, with the Network Api Uri, and a request object
-//     const rpc = new JsonRpc('https://api.eosnewyork.io', { fetch });
-//     // Request the balance, passing in the token contract, the account name, and the token symbol
-//     rpc.get_currency_balance('eosio.token', account_name, 'EOS').then((balance) => console.log(balance));
-// }
+eos = EosApi(options)
+
+const { Api, JsonRpc } = require('eosjs');
+const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig'); // development only
+const { TextEncoder, TextDecoder } = require('util');
+
+var generate = function() {
+    const mnemonic = bip39.generateMnemonic()
+    const seed = bip39.mnemonicToSeedHex(mnemonic)
+    const master = hdkey.fromMasterSeed(Buffer.from(seed, 'hex'))
+    const node = master.derive("m/44'/194'/0'/0/0")
+    console.log("publicKey: " + ecc.PublicKey(node._publicKey).toString())
+    console.log("privateKey: " + wif.encode(128, node._privateKey, false))
+}
+
+var create = async function(account_name, address) {
+
+    var privateKeys = ['5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR'];
+
+    var signatureProvider = new JsSignatureProvider(privateKeys);
+
+    var fetch = require('node-fetch');
 
 
+    var rpc = new JsonRpc('https://jungle2.cryptolions.io:443', { fetch });
 
-// EosApi = require('eosjs-api') // Or EosApi = require('./src')
+    var api = new Api({
+        rpc,
+        signatureProvider,
+        textDecoder: new TextDecoder(),
+        textEncoder: new TextEncoder(),
+    });
+    api.transact({
+        actions: [{
+                account: 'eosio',
+                name: 'newaccount',
+                authorization: [{
+                    actor: 'rahultest321',
+                    permission: 'active',
+                }, ],
+                data: {
+                    creator: 'rahultest321',
+                    name: account_name,
+                    owner: {
+                        threshold: 1,
+                        keys: [{
+                            key: address,
+                            weight: 1,
+                        }, ],
+                        accounts: [],
+                        waits: [],
+                    },
+                    active: {
+                        threshold: 1,
+                        keys: [{
+                            key: address,
+                            weight: 1,
+                        }, ],
+                        accounts: [],
+                        waits: [],
+                    },
+                },
+            },
+            {
+                account: 'eosio',
+                name: 'buyrambytes',
+                authorization: [{
+                    actor: 'rahultest321',
+                    permission: 'active',
+                }, ],
+                data: {
+                    payer: 'rahultest321',
+                    receiver: account_name,
+                    bytes: 8192,
+                },
+            },
+            {
+                account: 'eosio',
+                name: 'delegatebw',
+                authorization: [{
+                    actor: 'rahultest321',
+                    permission: 'active',
+                }, ],
+                data: {
+                    from: 'rahultest321',
+                    receiver: account_name,
+                    stake_net_quantity: '0.0001 EOS',
+                    stake_cpu_quantity: '0.0001 EOS',
+                    transfer: false,
+                },
+            },
+        ],
+    }, {
+        blocksBehind: 3,
+        expireSeconds: 30,
+    }, ).then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err);
+    })
+}
 
-// // everything is optional
-// options = {
-//     httpEndpoint: 'https://jungle2.cryptolions.io:443', // default, null for cold-storage
-//     verbose: false, // API logging
-//     fetchConfiguration: {}
-// }
+var balance = async function(account_name) {
+    eos.getCurrencyBalance('eosio.token', account_name, 'EOS').then((balance) => console.log(balance));
+}
 
-// eos = EosApi(options)
+var send = async function(from_account,to_account,from_pvt_key) {
 
-// eos.getCurrencyBalance('eosio.token', 'rahultest321', 'EOS').then((balance) => console.log(balance));
+    var privateKeys = [from_pvt_key];
 
-// const { Api, JsonRpc } = require ('eosjs');
-// const { JsSignatureProvider } = require ('eosjs/dist/eosjs-jssig');  // development only
+    var signatureProvider = new JsSignatureProvider(privateKeys);
 
-// const privateKeys = '5K3fgCjoFtswqCWjGwNuorKEDPJWRPowi5MasDZM68eZiiUvwNY';
+    var fetch = require('node-fetch');
 
-// const signatureProvider = new JsSignatureProvider(privateKeys);
-// const rpc = new JsonRpc('https://api.eosnewyork.io');
-// const api = new Api({ rpc, signatureProvider })
+    var rpc = new JsonRpc('https://jungle2.cryptolions.io:443', { fetch });
 
-// api.transact({
-//   actions: [{
-//     account: 'eosio',
-//     name: 'newaccount',
-//     authorization: [{
-//       actor: 'infinity1ope',
-//       permission: 'active',
-//     }],
-//     data: {
-//       creator: 'infinity1ope',
-//       name: 'rahultest123',
-//       owner: {
-//         threshold: 1,
-//         keys: [{
-//           key: 'EOS5WuVDqf5ujn2XNbGktPv2bczekP4Px8ZXwcoJGNrtbVUvv5vCK',
-//           weight: 1
-//         }],
-//         accounts: [],
-//         waits: []
-//       },
-//       active: {
-//         threshold: 1,
-//         keys: [{
-//           key: 'EOS5WuVDqf5ujn2XNbGktPv2bczekP4Px8ZXwcoJGNrtbVUvv5vCK',
-//           weight: 1
-//         }],
-//         accounts: [],
-//         waits: []
-//       },
-//     },
-//   }]
-// }, {
-//   blocksBehind: 3,
-//   expireSeconds: 30,
-// }).then(res => {
-// 	console.log(res);
-// }).catch(err => {
-// 	console.log(err)
-// })
+    var api = new Api({
+        rpc,
+        signatureProvider,
+        textDecoder: new TextDecoder(),
+        textEncoder: new TextEncoder(),
+    });
+
+    const result = await api.transact({
+        actions: [{
+            account: 'eosio.token',
+            name: 'transfer',
+            authorization: [{
+                actor: from_account,
+                permission: 'active',
+            }],
+            data: {
+                from: from_account,
+                to: to_account,
+                quantity: amount.toFixed(4) + ' EOS',
+                memo: '',
+            },
+        }]
+    }, {
+        blocksBehind: 3,
+        expireSeconds: 30,
+    });
+    console.log(result);
+}

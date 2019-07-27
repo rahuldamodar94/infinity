@@ -4,48 +4,71 @@ var rp = require('request-promise');
 const server = new Stellar.Server('https://horizon-testnet.stellar.org')
 Stellar.Network.useTestNetwork()
 
-let pairA = Stellar.Keypair.random()
-let pairB = Stellar.Keypair.random()
+// let pairA = Stellar.Keypair.random()
+// let pairB = Stellar.Keypair.random()
 
-console.log('apub',pairA.publicKey())
-console.log('asec',pairA.secret())
-console.log('bpub',pairB.publicKey())
+// console.log('apub',pairA.publicKey())
+// console.log('asec',pairA.secret())
+// console.log('bpub',pairB.publicKey())
+// console.log('bsec',pairB.secret())
 
-var accountA;
-var accountB;
-
-var test = async function() {
+var test = async function(address) {
     await rp.get({
         uri: 'https://horizon-testnet.stellar.org/friendbot',
-        qs: { addr: pairA.publicKey() },
+        qs: { addr: address },
         json: true
     })
 
-    accountA = await server.loadAccount(pairA.publicKey())
+    var accountA = await server.loadAccount(address)
 
     accountA.balances.forEach((balance) => {
         console.log('Type:', balance.asset_type, ', Balance:', balance.balance)
     })
 }
 
-var test2 = async function() {
-    await rp.get({
-        uri: 'https://horizon-testnet.stellar.org/friendbot',
-        qs: { addr: pairB.publicKey() },
-        json: true
-    })
+var balance = async function(publicKey) {
 
-    accountB = await server.loadAccount(pairB.publicKey())
+    var accountB = await server.loadAccount(publicKey);
 
     accountB.balances.forEach((balance) => {
         console.log('Type:', balance.asset_type, ', Balance:', balance.balance)
     })
 }
 
-test().then(res => {
-    return test2();
-}).then(res => {
-    console.log('successs');
-}).catch(err => {
-    console.log(err);
-})
+
+
+var send = async function(source_pvt_key, destination_public_addr,amount) {
+
+const sourceSecretKey = source_pvt_key;
+
+const sourceKeypair = Stellar.Keypair.fromSecret(sourceSecretKey);
+const sourcePublicKey = sourceKeypair.publicKey();
+
+const receiverPublicKey = destination_public_addr;
+
+const account = await server.loadAccount(sourcePublicKey);
+
+
+const fee = await server.fetchBaseFee();
+
+const transaction = new Stellar.TransactionBuilder(account, { fee })
+    .addOperation(Stellar.Operation.payment({
+        destination: receiverPublicKey,
+        asset: Stellar.Asset.native(),
+        amount: amount.toFixed(7),
+    }))
+    .setTimeout(30)
+    .build();
+
+transaction.sign(sourceKeypair);
+
+console.log(transaction.toEnvelope().toXDR('base64'));
+
+try {
+    const transactionResult = await server.submitTransaction(transaction);
+    console.log(JSON.stringify(transactionResult, null, 2));
+} catch (e) {
+    console.log('An error has occured:');
+    console.log(e.response.data.extras.result_codes);
+}
+}

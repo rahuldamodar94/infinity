@@ -1,6 +1,5 @@
 var axios = require('axios');
 
-
 var balance = function(address) {
 
     axios({
