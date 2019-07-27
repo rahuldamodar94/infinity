@@ -1,25 +1,24 @@
 var coinMarketCapKey = 'd0c9d885-8f21-4964-93d5-115af3bacf63';
 
 
-var getRate = function(convert_to) {
-    const rp = require('request-promise');
-    const requestOptions = {
-        method: 'GET',
-        uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
-        qs: {
-            'start': '1',
-            'limit': '20',
-            'convert': convert_to
-        },
-        headers: {
-            'X-CMC_PRO_API_KEY': coinMarketCapKey,
-        },
-        json: true,
-        gzip: true
-    };
+var getRate = async function(convert_to) {
+    try {
 
-    rp(requestOptions).then(async response => {
-        var detailsArray = response.data;
+        const rp = require('request-promise');
+        const requestOptions = {
+            method: 'GET',
+            uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+            qs: {
+                'start': '1',
+                'limit': '20',
+                'convert': convert_to
+            },
+            headers: {
+                'X-CMC_PRO_API_KEY': coinMarketCapKey,
+            },
+            json: true,
+            gzip: true
+        };
 
         var result = {
             BTC: '',
@@ -31,6 +30,12 @@ var getRate = function(convert_to) {
             TRX: '',
             BTC: '',
         };
+
+        var response = await rp(requestOptions);
+        var detailsArray = response.data;
+
+
+
         for (detail of detailsArray) {
             switch (detail.symbol) {
                 case 'BTC':
@@ -57,12 +62,16 @@ var getRate = function(convert_to) {
             }
         }
 
-        console.log(result);
-    }).catch((err) => {
-        console.log('API call error:', err.message);
-    });
+        return (result);
+    } catch (err) {
+        console.log(err.message)
+    }
 
 }
 
 // getRate('USDT');
-getRate('USD');
+getRate('USD').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err.message)
+})
