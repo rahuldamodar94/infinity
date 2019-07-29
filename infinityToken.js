@@ -22,7 +22,7 @@ var getBalance = async function(address, tokenId) {
     return balance;
 }
 
-// getBalance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV', '1000138').then(res => {
+// getBalance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV', '1000137').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);

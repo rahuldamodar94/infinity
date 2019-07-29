@@ -1,16 +1,16 @@
 const Web3 = require('web3');
 var Tx = require('ethereumjs-tx')
-//http://68.183.3.239:8545/
+// //http://68.183.3.239:8545/
 const provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/75aa7935112647bc8cc49d20beafa189');
 const web3 = new Web3(provider);
 
 
-var balance = async function(address) {
-    web3.eth.getBalance(address, (err, wei) => {
-        balance = web3.utils.fromWei(wei, 'ether')
-        console.log(balance);
-    })
-}
+// var balance = async function(address) {
+//     web3.eth.getBalance(address, (err, wei) => {
+//         balance = web3.utils.fromWei(wei, 'ether')
+//         console.log(balance);
+//     })
+// }
 
 var send = async function(from_address, to_address, from_pvt_key, amount) {
 
@@ -24,7 +24,7 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
         const txObject = {
             nonce: web3.utils.toHex(txCount),
             to: account2,
-            value: web3.utils.toHex(web3.utils.toWei(amount, 'ether')),
+            value: web3.utils.toHex(web3.utils.toWei(amount.toString(), 'ether')),
             gasLimit: web3.utils.toHex(21000),
             gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei'))
         }
@@ -44,3 +44,29 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
     })
 
 }
+
+send('0xE5c926c8d3769BB99310D8F423CF699fAC45DA75','0x352088884E95CaBe2B3d63Da232cdC53182dF7f0','5058223F2828F98D0C4BBF055C64C9AB0B93303F32E722E1C82E639BFC656995',1).then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err)
+})
+
+// const hdkey = require('hdkey')
+
+// const bip39 = require('bip39')
+// const ethUtil = require('ethereumjs-util')
+
+// const mnemonic = bip39.generateMnemonic();
+// const seed = bip39.mnemonicToSeedHex(mnemonic)
+// const root = hdkey.fromMasterSeed(seed)
+// const masterPrivateKey = root.privateKey.toString('hex');
+// const masterPubKey = root.publicKey.toString('hex');
+
+// var path = "m/44'/60'/0'/0/0";
+// const addrNode = root.derive(path)
+// const pubKey = ethUtil.privateToPublic(addrNode._privateKey)
+// console.log((addrNode._privateKey).toString('hex'));
+// const addr = ethUtil.publicToAddress(pubKey).toString('hex');
+// const address = ethUtil.toChecksumAddress(addr)
+
+// console.log(address);

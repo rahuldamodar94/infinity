@@ -9,8 +9,7 @@ const instructions = { maxLedgerVersionOffset: 5 };
 var generate = async function() {
     mnemonic = bip39.generateMnemonic()
 
-    console.log('mnemonic: ' + mnemonic)
-    const seed = bip39.mnemonicToSeed('stage between scorpion joke dwarf spice street gown rose moral luggage escape')
+    const seed = bip39.mnemonicToSeed(mnemonic)
     const m = bip32.fromSeedBuffer(seed)
     const keyPair = m.derivePath("m/44'/144'/0'/0/0").keyPair.getKeyPairs()
     const key = ripple.KeyPair.from_json(keyPair.privateKey.substring(2))

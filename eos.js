@@ -17,14 +17,23 @@ const { Api, JsonRpc } = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig'); // development only
 const { TextEncoder, TextDecoder } = require('util');
 
-var generate = function() {
+var generate = async function() {
     const mnemonic = bip39.generateMnemonic()
     const seed = bip39.mnemonicToSeedHex(mnemonic)
     const master = hdkey.fromMasterSeed(Buffer.from(seed, 'hex'))
-    const node = master.derive("m/44'/194'/0'/0/0")
-    console.log("publicKey: " + ecc.PublicKey(node._publicKey).toString())
+    const node = master.derive("m/44'/2'/0'/0/0")
+
+    // console.log(node);
+    // console.log("publicKey: " + ecc.PublicKey(node._publicKey).toString())
+    console.log(node._privateKey);
     console.log("privateKey: " + wif.encode(128, node._privateKey, false))
 }
+
+generate().then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err)
+})
 
 var create = async function(account_name, address) {
 
