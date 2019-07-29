@@ -6,7 +6,7 @@ let { HdTronPayments } = require('@faast/tron-payments')
 
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
-    privateKey: 'F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1'
+    privateKey: '5eb34eb94221e272656f1cd7c40d4f9aabdbf0d91277a9108f1e8077fa9480ee'
 })
 
 let tronAddressGenerate = async function() {
@@ -45,6 +45,7 @@ var freeze = async function(address, pvt_key, amount, duration, type) {
             resource: type,
         },
     }).then(function(response) {
+        console.log(response)
         return tronWeb.trx.sign(response.data, pvt_key)
     }).then(res => {
         return tronWeb.trx.sendRawTransaction(res);
@@ -55,7 +56,7 @@ var freeze = async function(address, pvt_key, amount, duration, type) {
     })
 }
 
-var unfreeze = async function(address,type,pvt_key) {
+var unfreeze = async function(address, type, pvt_key) {
 
     axios({
         method: 'post',
@@ -75,6 +76,8 @@ var unfreeze = async function(address,type,pvt_key) {
     })
 }
 
+
+
 var getBandwidthAndEnergyInfo = async function(address) {
     tronWeb.trx.getAccountResources(address).then(res => {
         console.log(res);
@@ -90,8 +93,20 @@ var send = async function(from_pvt_key, to_address, amount) {
     })
 }
 
-
 var balance = async function(address) {
     const userBalance = await tronWeb.trx.getBalance(tronWeb.address.toHex(address));
     console.log(`User's balance is: ${ userBalance/1000000 }`);
 };
+
+
+// getBandwidthAndEnergyInfo('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
+//     // console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
+
+// freeze('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV','F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1','200',3,'BANDWIDTH').then(res =>{
+//     console.log('success');
+// }).catch(err=> {
+//     console.log(err.message)
+// })

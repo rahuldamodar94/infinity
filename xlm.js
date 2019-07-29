@@ -26,6 +26,12 @@ var test = async function(address) {
     })
 }
 
+test('GB5EW3JOSZQ6RLNCTRTOOCE5EXTAZ7B3JIS3XRXJDKO65AT4JO6IBXRW').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
+
 var balance = async function(publicKey) {
 
     var accountB = await server.loadAccount(publicKey);
@@ -37,38 +43,38 @@ var balance = async function(publicKey) {
 
 
 
-var send = async function(source_pvt_key, destination_public_addr,amount) {
+var send = async function(source_pvt_key, destination_public_addr, amount) {
 
-const sourceSecretKey = source_pvt_key;
+    const sourceSecretKey = source_pvt_key;
 
-const sourceKeypair = Stellar.Keypair.fromSecret(sourceSecretKey);
-const sourcePublicKey = sourceKeypair.publicKey();
+    const sourceKeypair = Stellar.Keypair.fromSecret(sourceSecretKey);
+    const sourcePublicKey = sourceKeypair.publicKey();
 
-const receiverPublicKey = destination_public_addr;
+    const receiverPublicKey = destination_public_addr;
 
-const account = await server.loadAccount(sourcePublicKey);
+    const account = await server.loadAccount(sourcePublicKey);
 
 
-const fee = await server.fetchBaseFee();
+    const fee = await server.fetchBaseFee();
 
-const transaction = new Stellar.TransactionBuilder(account, { fee })
-    .addOperation(Stellar.Operation.payment({
-        destination: receiverPublicKey,
-        asset: Stellar.Asset.native(),
-        amount: amount.toFixed(7),
-    }))
-    .setTimeout(30)
-    .build();
+    const transaction = new Stellar.TransactionBuilder(account, { fee })
+        .addOperation(Stellar.Operation.payment({
+            destination: receiverPublicKey,
+            asset: Stellar.Asset.native(),
+            amount: amount.toFixed(7),
+        }))
+        .setTimeout(30)
+        .build();
 
-transaction.sign(sourceKeypair);
+    transaction.sign(sourceKeypair);
 
-console.log(transaction.toEnvelope().toXDR('base64'));
+    console.log(transaction.toEnvelope().toXDR('base64'));
 
-try {
-    const transactionResult = await server.submitTransaction(transaction);
-    console.log(JSON.stringify(transactionResult, null, 2));
-} catch (e) {
-    console.log('An error has occured:');
-    console.log(e.response.data.extras.result_codes);
-}
+    try {
+        const transactionResult = await server.submitTransaction(transaction);
+        console.log(JSON.stringify(transactionResult, null, 2));
+    } catch (e) {
+        console.log('An error has occured:');
+        console.log(e.response.data.extras.result_codes);
+    }
 }

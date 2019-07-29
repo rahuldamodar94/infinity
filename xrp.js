@@ -33,7 +33,7 @@ var balance = function(address) {
 }
 
 
-var send = async function(from_address, to_address, amount) {
+var send = async function(from_address, to_address, amount, private_key) {
 
     const payment = {
         source: {
@@ -65,7 +65,7 @@ var send = async function(from_address, to_address, amount) {
 
     api.connect().then(() => {
         console.log('Connected...');
-        return api.preparePayment(address, payment, instructions).then(prepared => {
+        return api.preparePayment(from_address, payment, instructions).then(prepared => {
             console.log('Payment transaction prepared...');
             const { signedTransaction } = api.sign(prepared.txJSON, secret);
             console.log('Payment transaction signed...');
