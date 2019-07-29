@@ -18,9 +18,15 @@ let tronAddressGenerate = async function() {
     let tronPayments = new HdTronPayments({ hdKey: (addrNode.toJSON()).xpriv })
     let depositAddress = await tronPayments.getAddress(0)
     let privateKey = await tronPayments.getPrivateKey(0)
+    console.log(privateKey)
     console.log(depositAddress)
     return mnemonic;
 }
+
+
+// tronAddressGenerate().then(res => {
+//     console.log(res);
+// })
 
 let tronAddressRetrieve = async function(mnemonic) {
     const seed = bip39.mnemonicToSeed(mnemonic);

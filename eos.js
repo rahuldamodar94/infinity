@@ -114,10 +114,11 @@ var create = async function(account_name, address) {
 }
 
 var balance = async function(account_name) {
-    eos.getCurrencyBalance('eosio.token', account_name, 'EOS').then((balance) => console.log(balance));
+    let balance = await eos.getCurrencyBalance('eosio.token', account_name, 'EOS')
+    return (balance);
 }
 
-var send = async function(from_account,to_account,from_pvt_key) {
+var send = async function(from_account, to_account, from_pvt_key, amount) {
 
     var privateKeys = [from_pvt_key];
 
@@ -145,7 +146,7 @@ var send = async function(from_account,to_account,from_pvt_key) {
             data: {
                 from: from_account,
                 to: to_account,
-                quantity: amount.toFixed(4) + ' EOS',
+                quantity: '' + parseFloat(amount).toFixed(4) + ' EOS',
                 memo: '',
             },
         }]
@@ -153,5 +154,18 @@ var send = async function(from_account,to_account,from_pvt_key) {
         blocksBehind: 3,
         expireSeconds: 30,
     });
-    console.log(result);
+    return (result);
 }
+
+
+// send('userer123454', 'userer123453', '5JywnxF5VU4xv7FZvLZ7NgGEXs8zN9XC1SxuZt9ncJnC6UuDMVv', '10').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err)
+// })
+
+// balance('userer123454').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
