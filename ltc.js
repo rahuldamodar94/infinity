@@ -1,6 +1,30 @@
 var axios = require('axios');
-var wif = require('wif');
-var litecore = require('litecore-lib')
+const bip39 = require('bip39')
+var litecore = require('litecore-lib');
+
+
+var generate = function() {
+
+    litecore.Networks.defaultNetwork = litecore.Networks.testnet;
+    const mnemonic = bip39.generateMnemonic()
+    var value = Buffer.from(mnemonic);
+    var hash = litecore.crypto.Hash.sha256(value);
+    var bn = litecore.crypto.BN.fromBuffer(hash);
+
+    var address = new litecore.PrivateKey(bn).toAddress();
+    var pvtkey = new litecore.PrivateKey(bn);
+
+    var pubkey = new litecore.PublicKey(pvtkey);
+    var address_final = new litecore.Address(pubkey);
+
+    console.log(address_final.toString());
+
+    console.log(pvtkey.toWIF());
+}
+
+// generate();
+
+
 var balance = function(address) {
 
     axios({
@@ -15,29 +39,37 @@ var balance = function(address) {
 
 // balance('LhrhMLbLemDnhyqdu4ia2uT98vAHMWwUSm');
 
-var create = async function() {
+var create = async function(pvt_key) {
 
-
-    var value = new Buffer.from('muffin limit tell among avoid salon victory purchase enact exercise scout hammer');
-    var hash = litecore.crypto.Hash.sha256(value);
-    // let pvt_key = wif.encode(128, hash, false);
-
-    let pvt_key = wif.encode(128, hash, false);
-    axios({
-        method: 'post',
-        url: 'http://128.199.44.148:8001/importpvtkey/' + pvt_key + '-testing',
-    }).then(res => {
-        console.log(res);
-    }).catch(err => {
-        console.log(err.message)
+    let res = await axios({
+        method: 'get',
+        url: 'http://128.199.44.148:8001/importpvtkey/' + pvt_key + '-rahuww123',
     })
+
+    return res;
 
 }
 
-var privateKey = new litecore.PrivateKey('L1uyy5qTuGrVXrmrsvHWHgVzW9kKdrp27wBC7Vs6nZDTF2BRUVwy');
-console.log(privateKey)
-// create().then(res => {
-// 	console.log('success');
+// create('cNzG1uxzk2F6y4z4yXHd3yUJDMt6csfmbmwmPKGiouMHsqSu9UnL').then(res => {
+//     console.log(res.data);
 // }).catch(err => {
-// 	console.log(err);
+//     console.log(err);
+// })
+
+
+var send = async function() {
+
+    let res = await axios({
+        method: 'get',
+        url: 'http://128.199.44.148:8000/sendlitecoin/mi8aCuWS7stcLeGvUTtEKiaFXdTUArP1fD-mni6Zv4UcohS7VAZyw696MBD3ra5HNCBoE-0.1',
+    })
+
+    return res;
+
+}
+
+// send().then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
 // })
