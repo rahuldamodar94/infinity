@@ -39,11 +39,11 @@ var balance = function(address) {
 
 // balance('LhrhMLbLemDnhyqdu4ia2uT98vAHMWwUSm');
 
-var create = async function(pvt_key) {
+var create = async function(pvt_key, account_name) {
 
     let res = await axios({
         method: 'get',
-        url: 'http://128.199.44.148:8001/importpvtkey/' + pvt_key + '-rahuww123',
+        url: 'http://128.199.44.148:8001/importpvtkey/' + pvt_key + '-' + account_name,
     })
 
     return res;
@@ -57,19 +57,19 @@ var create = async function(pvt_key) {
 // })
 
 
-var send = async function() {
+var send = async function(account_name, to_address, amount) {
 
     let res = await axios({
         method: 'get',
-        url: 'http://128.199.44.148:8000/sendlitecoin/mi8aCuWS7stcLeGvUTtEKiaFXdTUArP1fD-mni6Zv4UcohS7VAZyw696MBD3ra5HNCBoE-0.1',
+        url: 'http://128.199.44.148:8000/sendlitecoin/' + account_name + '-' + to_address + '-' + amount,
     })
 
     return res;
 
 }
 
-// send().then(res => {
-//     console.log(res);
-// }).catch(err => {
-//     console.log(err);
-// })
+send('rah123','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','2').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
