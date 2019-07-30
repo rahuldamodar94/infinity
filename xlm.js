@@ -26,7 +26,7 @@ var test = async function(address) {
     })
 }
 
-test('GB5EW3JOSZQ6RLNCTRTOOCE5EXTAZ7B3JIS3XRXJDKO65AT4JO6IBXRW').then(res => {
+test('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP').then(res => {
     console.log(res);
 }).catch(err => {
     console.log(err);

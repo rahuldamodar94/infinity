@@ -23,11 +23,6 @@ let tronAddressGenerate = async function() {
     return mnemonic;
 }
 
-
-// tronAddressGenerate().then(res => {
-//     console.log(res);
-// })
-
 let tronAddressRetrieve = async function(mnemonic) {
     const seed = bip39.mnemonicToSeed(mnemonic);
     const root = hdkey.fromMasterSeed(seed);
@@ -104,8 +99,20 @@ var balance = async function(address) {
     console.log(`User's balance is: ${ userBalance/1000000 }`);
 };
 
+var getInfo = async function(address) {
 
-// getBandwidthAndEnergyInfo('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
+    let response = await tronWeb.trx.getAccount(address);
+    console.log(response)
+}
+
+// getInfo('TEb6soxCbhjjbUC6XQq2LBZv7riEFGDmZF').then(res => {
+//     // console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+
+// getBandwidthAndEnergyInfo('TP82vPzqLohrMWELkHbLhwktAWnpCoP42f').then(res => {
 //     // console.log(res)
 // }).catch(err => {
 //     console.log(err);
@@ -115,4 +122,8 @@ var balance = async function(address) {
 //     console.log('success');
 // }).catch(err=> {
 //     console.log(err.message)
+// })
+
+// tronAddressGenerate().then(res => {
+//     console.log(res);
 // })

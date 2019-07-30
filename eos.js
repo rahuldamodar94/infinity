@@ -22,18 +22,9 @@ var generate = async function() {
     const seed = bip39.mnemonicToSeedHex(mnemonic)
     const master = hdkey.fromMasterSeed(Buffer.from(seed, 'hex'))
     const node = master.derive("m/44'/2'/0'/0/0")
-
-    // console.log(node);
-    // console.log("publicKey: " + ecc.PublicKey(node._publicKey).toString())
-    console.log(node._privateKey);
+    console.log("publicKey: " + ecc.PublicKey(node._publicKey).toString())
     console.log("privateKey: " + wif.encode(128, node._privateKey, false))
 }
-
-generate().then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err)
-})
 
 var create = async function(account_name, address) {
 
@@ -167,7 +158,14 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
 }
 
 
-// send('userer123454', 'userer123453', '5JywnxF5VU4xv7FZvLZ7NgGEXs8zN9XC1SxuZt9ncJnC6UuDMVv', '10').then(res => {
+// create('vijaytest123','EOS6mL8i176sJ1H9ZNFhkH4G4cgam1wUaBqNYvxNyUCjcZA9LGEeE').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
+
+
+// send('rahultest321', 'vijaytest123', '5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR', '10').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err)
@@ -177,4 +175,11 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);
+// })
+
+
+// generate().then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err)
 // })

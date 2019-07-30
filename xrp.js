@@ -32,7 +32,7 @@ var balance = function(address) {
 }
 
 
-var send = async function(from_address, to_address, amount, private_key) {
+var send = async function(from_address, to_address, amount, secret) {
 
     const payment = {
         source: {
@@ -73,3 +73,11 @@ var send = async function(from_address, to_address, amount, private_key) {
     }).catch(fail);
 
 }
+
+send('rhzWTrnitp3qcWpHds53e7LAq34hFxpUHo','rspmDusLyumrWGHUTnoXkAXGwFyQhma11X','100','snyWsaFrHhwbXhVcsodm3KxHY1eon').then(res => {
+    console.log(res)
+}).catch(err => {
+    console.log(err);
+})
+
+

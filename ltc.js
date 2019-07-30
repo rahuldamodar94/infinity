@@ -10,19 +10,18 @@ var generate = function() {
     var value = Buffer.from(mnemonic);
     var hash = litecore.crypto.Hash.sha256(value);
     var bn = litecore.crypto.BN.fromBuffer(hash);
-
     var address = new litecore.PrivateKey(bn).toAddress();
     var pvtkey = new litecore.PrivateKey(bn);
-
     var pubkey = new litecore.PublicKey(pvtkey);
     var address_final = new litecore.Address(pubkey);
-
     console.log(address_final.toString());
-
     console.log(pvtkey.toWIF());
 }
 
-// generate();
+
+
+
+generate();
 
 
 var balance = function(address) {
@@ -68,8 +67,8 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-send('rah123','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','2').then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+// send('','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','2').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
