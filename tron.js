@@ -4,7 +4,6 @@ const bip39 = require('bip39');
 const hdkey = require('hdkey');
 let { HdTronPayments } = require('@faast/tron-payments')
 
-
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
 })

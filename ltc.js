@@ -32,7 +32,7 @@ var balance = function(address) {
     })
 }
 
-// balance('mrgPHmaTox8EPJ6hGBBYmUmEh8DPddoG9C');
+// balance('mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y');
 
 var create = async function(pvt_key, account_name) {
 
@@ -63,7 +63,7 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-// send('','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','2').then(res => {
+// send('vijayragavan_v@nextazy.com','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','0.01').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -83,4 +83,4 @@ var isValid = function(address) {
     console.log(litecore.Address.isValid(address, litecore.Networks.testnet))
 }
 
-// isValid('mftEkAxpiGYuWpgqT58Lqm5y4yMzFrdTgY');
+// isValid('mov7DjGJBFgRH6naJQDdEsLyEMWaKsnFWF');
