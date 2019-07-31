@@ -103,6 +103,12 @@ var balance = async function(address) {
     console.log(`User's balance is: ${ userBalance/1000000 }`);
 };
 
+balance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err)
+})
+
 var getInfo = async function(address) {
 
     let response = await tronWeb.trx.getAccount(address);

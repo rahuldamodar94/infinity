@@ -68,3 +68,12 @@ var send = async function(from_address, from_pvt_key, to_address, amount) {
 // }).catch(err => {
 //     console.log(err);
 // })
+
+
+var importPvtKey = function(secret_key) {
+
+    var address = new bitcore.PrivateKey(secret_key).toAddress();
+    console.log(address.toString())
+}
+
+// importPvtKey('KxufKKPrqiU6jp9wvNPQgLbZTBzFMqTQVCFBFx7BLWrkexmMF264');

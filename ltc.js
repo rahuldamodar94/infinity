@@ -68,3 +68,13 @@ var send = async function(account_name, to_address, amount) {
 // }).catch(err => {
 //     console.log(err);
 // })
+
+
+var importPvtKey = function(secret_key) {
+
+    var address = new litecore.PrivateKey(secret_key).toAddress();
+    console.log(address.toString())
+}
+
+
+// importPvtKey('T4w1z71fSEUUA6fX4kdMpsnisPd3ZPcBnRQp7oMacSUxuMzN1n9L');
