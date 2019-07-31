@@ -18,25 +18,21 @@ var generate = function() {
     console.log(pvtkey.toWIF());
 }
 
-
-
-
-generate();
-
+// generate();
 
 var balance = function(address) {
 
     axios({
         method: 'get',
-        url: 'https://api.blockcypher.com/v1/ltc/main/addrs/' + address + '/balance',
+        url: 'https://chain.so/api/v2/get_address_balance/LTCTEST/' + address + '/0',
     }).then(function(response) {
-        console.log(response.data.final_balance / 100000000);
+        console.log(response.data.data.confirmed_balance);
     }).catch(err => {
         console.log(err)
     })
 }
 
-// balance('LhrhMLbLemDnhyqdu4ia2uT98vAHMWwUSm');
+// balance('mrgPHmaTox8EPJ6hGBBYmUmEh8DPddoG9C');
 
 var create = async function(pvt_key, account_name) {
 
