@@ -32,7 +32,7 @@ var balance = function(address) {
     })
 }
 
-// balance('mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y');
+// balance('mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5');
 
 
 var create = async function(pvt_key, account_name) {
@@ -46,7 +46,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('cNzG1uxzk2F6y4z4yXHd3yUJDMt6csfmbmwmPKGiouMHsqSu9UnL').then(res => {
+// create('cPTh5rWSZYGCEpenMZrRzhv8KbdrxtAkfubvxqXTqcPso2zDs1L3','vijay').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
@@ -63,7 +63,13 @@ var send = async function(from_address, from_pvt_key, to_address, amount) {
 
 }
 
-// send('2N5ga4sbehH128PWp6nbQaBoxDisQvjaWVU', 'cQ2xV7xbjbRHuq7J6iKRvFN11KRYoNtokeKU8FqXxF8sqWRXUCxd', 'mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '0.0001').then(res => {
+// send('mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '921Xy8dB8iK4mHJFist9Whciz2MSXmMAPkDRJUx9Ad13wTGeFw4', 'mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y', '0.000001').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+// send('mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y', 'cPTh5rWSZYGCEpenMZrRzhv8KbdrxtAkfubvxqXTqcPso2zDs1L3', 'mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '0.0001').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -76,7 +82,7 @@ var importPvtKey = function(secret_key) {
     console.log(address.toString())
 }
 
-// importPvtKey('KxufKKPrqiU6jp9wvNPQgLbZTBzFMqTQVCFBFx7BLWrkexmMF264');
+// importPvtKey('cPTh5rWSZYGCEpenMZrRzhv8KbdrxtAkfubvxqXTqcPso2zDs1L3');
 
 
 var isValid = function(address) {

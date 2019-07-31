@@ -20,11 +20,11 @@ var test = async function(address) {
     })
 }
 
-// test('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP').then(res => {
-//     console.log(res);
-// }).catch(err => {
-//     console.log(err);
-// })
+test('GDJYMHWJZK7LLMHHN3CKF7JDREQ7RA62SRH75YHBB2ENTA2PGNGFUQDQ').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
 
 var balance = async function(publicKey) {
 
