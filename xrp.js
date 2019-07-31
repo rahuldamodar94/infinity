@@ -2,7 +2,7 @@ const RippleAPI = require('ripple-lib').RippleAPI;
 const bip39 = require("bip39");
 const bip32 = require("ripple-bip32");
 const ripple = require('ripplelib')
-const ripple_key = require('ripple-keypairs');
+const rippleKeyPairs = require('ripple-keypairs');
 
 const api = new RippleAPI({ server: 'wss://s.altnet.rippletest.net:51233' });
 const instructions = { maxLedgerVersionOffset: 5 };
@@ -77,6 +77,15 @@ var send = async function(from_address, to_address, amount, from_pvt_key, from_p
 
 }
 
+var importPvtKey = function(secret) {
+
+    const keypair = rippleKeyPairs.deriveKeypair(secret);
+    console.log(keypair);
+    const address = rippleKeyPairs.deriveAddress(keypair.publicKey);
+    console.log(address);
+}
+
+// importPvtKey('sEdSWEN4yZYhBp8QS2Bgotxu8uj75UE');
 
 // send('rDCXVbNixBR9eKcao9NMfRZ4qDF2mGMrF3', 'rhzWTrnitp3qcWpHds53e7LAq34hFxpUHo', '100', 'snyWsaFrHhwbXhVcsodm3KxHY1eon').then(res => {
 //     console.log(res)
