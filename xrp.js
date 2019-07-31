@@ -53,27 +53,27 @@ var send = async function(from_address, to_address, amount, from_pvt_key, from_p
         }
     };
 
-    function quit(message) {
-        console.log(message);
-        process.exit(0);
-    }
+    var response = new Promise((resolve, reject) => {
 
-    function fail(message) {
-        console.error(message);
-        process.exit(1);
-    }
-
-
-    api.connect().then(() => {
-        console.log('Connected...');
-        return api.preparePayment(from_address, payment, instructions).then(prepared => {
+        api.connect().then(() => {
+            console.log('Connected...');
+            return api.preparePayment(from_address, payment, instructions);
+        }).then(prepared => {
             console.log('Payment transaction prepared...');
             const keypair = { privateKey: from_pvt_key, publicKey: from_pub_key };
             const { signedTransaction } = api.sign(prepared.txJSON, keypair);
             console.log('Payment transaction signed...');
-            api.submit(signedTransaction).then(quit, fail);
+            return api.submit(signedTransaction)
+        }).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
         });
-    }).catch(fail);
+    })
+
+    let final = await response;
+    return final;
+
 
 }
 
