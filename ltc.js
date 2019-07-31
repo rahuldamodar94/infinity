@@ -78,3 +78,9 @@ var importPvtKey = function(secret_key) {
 
 
 // importPvtKey('T4w1z71fSEUUA6fX4kdMpsnisPd3ZPcBnRQp7oMacSUxuMzN1n9L');
+
+var isValid = function(address) {
+    console.log(litecore.Address.isValid(address, litecore.Networks.testnet))
+}
+
+// isValid('mftEkAxpiGYuWpgqT58Lqm5y4yMzFrdTgY');

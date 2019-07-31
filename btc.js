@@ -77,3 +77,10 @@ var importPvtKey = function(secret_key) {
 }
 
 // importPvtKey('KxufKKPrqiU6jp9wvNPQgLbZTBzFMqTQVCFBFx7BLWrkexmMF264');
+
+
+var isValid = function(address) {
+    console.log(bitcore.Address.isValid(address, bitcore.Networks.testnet))
+}
+
+// isValid('mftEkAxpiGYuWpgqT58Lqm5y4yMzFrdTgY');

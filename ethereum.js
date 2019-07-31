@@ -40,6 +40,8 @@ var importPvtKey = function(pvt_key) {
     return ((account.address).substring(2))
 }
 
+// importPvtKey('135b553cffa3a081909f8d80b1d58e2e9acc6ed75b45dd830446c5363c4c6e7c')
+
 var send = async function(from_address, to_address, from_pvt_key, amount) {
 
     const account1 = from_address // Your account address 1
@@ -79,4 +81,8 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
 //     console.log(err)
 // })
 
-// importPvtKey('135b553cffa3a081909f8d80b1d58e2e9acc6ed75b45dd830446c5363c4c6e7c')
+var isValid = function(address) {
+    console.log(web3.utils.isAddress(address));
+}
+
+// isValid('0xE5c926c8d3769BB99310D8F423CF699fAC45DA75');
