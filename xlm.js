@@ -6,6 +6,8 @@ Stellar.Network.useTestNetwork()
 const XlmProvider = require("xlm-provider").default;
 const xlmProvider = new XlmProvider('testnet');
 
+var WAValidator = require('multicoin-address-validator');
+ 
 var test = async function(address) {
     await rp.get({
         uri: 'https://horizon-testnet.stellar.org/friendbot',
@@ -20,11 +22,11 @@ var test = async function(address) {
     })
 }
 
-test('GDJYMHWJZK7LLMHHN3CKF7JDREQ7RA62SRH75YHBB2ENTA2PGNGFUQDQ').then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+// test('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
 
 var balance = async function(publicKey) {
 
@@ -80,3 +82,15 @@ var importPvtKey = function(pvt_key) {
 }
 
 // importPvtKey('SAWMUQDDOLNRLDKYVK3SDJLVROL64PUALWJVEVBVZJXUK4Z2DVPBZZ75');
+
+
+var isValid = function(address) {
+    var valid = WAValidator.validate(address, 'XLM');
+    if (valid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// console.log(isValid('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP'));

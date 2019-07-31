@@ -3,6 +3,9 @@ const bip39 = require("bip39");
 const bip32 = require("ripple-bip32");
 const ripple = require('ripplelib')
 const rippleKeyPairs = require('ripple-keypairs');
+var WAValidator = require('wallet-address-validator');
+
+
 
 const api = new RippleAPI({ server: 'wss://s.altnet.rippletest.net:51233' });
 const instructions = { maxLedgerVersionOffset: 5 };
@@ -92,3 +95,15 @@ var importPvtKey = function(secret) {
 // }).catch(err => {
 //     console.log(err);
 // })
+
+
+var isValid = function(address) {
+    var valid = WAValidator.validate(address, 'XRP');
+    if (valid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// console.log(isValid('mftEkAxpiGYuWpgqT58Lqm5y4yMzFrdTgY'));

@@ -4,6 +4,8 @@ const ecc = require('eosjs-ecc')
 const bip39 = require('bip39')
 
 EosApi = require('eosjs-api')
+var WAValidator = require('multicoin-address-validator');
+
 
 options = {
     httpEndpoint: 'https://jungle2.cryptolions.io:443',
@@ -17,7 +19,7 @@ const { Api, JsonRpc } = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig'); // development only
 const { TextEncoder, TextDecoder } = require('util');
 
-var generate = async function() {
+var generate = function() {
     const mnemonic = bip39.generateMnemonic()
     const seed = bip39.mnemonicToSeedHex(mnemonic)
     const master = hdkey.fromMasterSeed(Buffer.from(seed, 'hex'))
@@ -183,3 +185,22 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
 // }).catch(err => {
 //     console.log(err)
 // })
+
+
+var isValid = function(address) {
+    var valid = WAValidator.validate(address, 'EOS');
+    if (valid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// console.log(isValid('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV'));
+
+var importPvtKey = function(pvt_key) {
+    console.log(ecc.privateToPublic(pvt_key));
+}
+
+// importPvtKey('5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR');
+

@@ -3,6 +3,7 @@ const axios = require('axios')
 const bip39 = require('bip39');
 const hdkey = require('hdkey');
 let { HdTronPayments } = require('@faast/tron-payments')
+var WAValidator = require('multicoin-address-validator');
 
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
@@ -81,7 +82,6 @@ var unfreeze = async function(address, type, pvt_key) {
 }
 
 
-
 var getBandwidthAndEnergyInfo = async function(address) {
     tronWeb.trx.getAccountResources(address).then(res => {
         console.log(res);
@@ -102,11 +102,11 @@ var balance = async function(address) {
     console.log(`User's balance is: ${ userBalance/1000000 }`);
 };
 
-balance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err)
-})
+// balance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err)
+// })
 
 var getInfo = async function(address) {
 
@@ -122,7 +122,7 @@ var getInfo = async function(address) {
 // })
 
 // getBandwidthAndEnergyInfo('TP82vPzqLohrMWELkHbLhwktAWnpCoP42f').then(res => {
-//     // console.log(res)
+//     console.log(res)
 // }).catch(err => {
 //     console.log(err);
 // })
@@ -138,3 +138,14 @@ var getInfo = async function(address) {
 // })
 
 // importPvtKey('F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1');
+
+var isValid = function(address) {
+    var valid = WAValidator.validate(address, 'TRX');
+    if (valid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// console.log(isValid('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV'));
