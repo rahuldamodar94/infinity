@@ -32,7 +32,7 @@ var balance = function(address) {
     })
 }
 
-// balance('mo73iyfm93xLocR3h6wcqubpKj1NigDnEi');
+// balance('2N5ga4sbehH128PWp6nbQaBoxDisQvjaWVU');
 
 
 var create = async function(pvt_key, account_name) {
@@ -63,11 +63,11 @@ var send = async function(from_address, from_pvt_key, to_address, amount) {
 
 }
 
-// send('', '', 'mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE', '2').then(res => {
-//     console.log(res);
-// }).catch(err => {
-//     console.log(err);
-// })
+send('2N5ga4sbehH128PWp6nbQaBoxDisQvjaWVU', 'cQ2xV7xbjbRHuq7J6iKRvFN11KRYoNtokeKU8FqXxF8sqWRXUCxd', 'mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '0.0001').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
 
 
 var importPvtKey = function(secret_key) {
