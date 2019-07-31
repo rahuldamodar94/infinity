@@ -34,7 +34,6 @@ var balance = async function(address) {
     })
 }
 
-
 var importPvtKey = function(pvt_key) {
     const account = web3.eth.accounts.privateKeyToAccount('0x' + pvt_key);
     return ((account.address).substring(2))
