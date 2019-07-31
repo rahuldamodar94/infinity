@@ -4,10 +4,14 @@ const bip39 = require('bip39');
 const hdkey = require('hdkey');
 let { HdTronPayments } = require('@faast/tron-payments')
 
+
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
-    privateKey: '5eb34eb94221e272656f1cd7c40d4f9aabdbf0d91277a9108f1e8077fa9480ee'
 })
+
+var importPvtKey = function(pvt_key) {
+    console.log(tronWeb.address.fromPrivateKey(pvt_key));
+}
 
 let tronAddressGenerate = async function() {
     const mnemonic = bip39.generateMnemonic();
@@ -111,7 +115,6 @@ var getInfo = async function(address) {
 //     console.log(err);
 // })
 
-
 // getBandwidthAndEnergyInfo('TP82vPzqLohrMWELkHbLhwktAWnpCoP42f').then(res => {
 //     // console.log(res)
 // }).catch(err => {
@@ -127,3 +130,5 @@ var getInfo = async function(address) {
 // tronAddressGenerate().then(res => {
 //     console.log(res);
 // })
+
+// importPvtKey('F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1');

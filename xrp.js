@@ -2,24 +2,25 @@ const RippleAPI = require('ripple-lib').RippleAPI;
 const bip39 = require("bip39");
 const bip32 = require("ripple-bip32");
 const ripple = require('ripplelib')
+const ripple_key = require('ripple-keypairs');
 
 const api = new RippleAPI({ server: 'wss://s.altnet.rippletest.net:51233' });
 const instructions = { maxLedgerVersionOffset: 5 };
 
-var generate = async function() {
+var generate = function() {
     mnemonic = bip39.generateMnemonic()
 
     const seed = bip39.mnemonicToSeed(mnemonic)
     const m = bip32.fromSeedBuffer(seed)
     const keyPair = m.derivePath("m/44'/144'/0'/0/0").keyPair.getKeyPairs()
     const key = ripple.KeyPair.from_json(keyPair.privateKey.substring(2))
-
     console.log('privateKey: ' + keyPair.privateKey)
     console.log('privateKeyWif: ' + key.to_pri_string()) // to_wif
     console.log('publicKey: ' + keyPair.publicKey)
     console.log('address: ' + key.to_address_string())
 }
 
+// generate();
 
 var balance = function(address) {
 
@@ -31,8 +32,9 @@ var balance = function(address) {
     });
 }
 
+// balance('rDCXVbNixBR9eKcao9NMfRZ4qDF2mGMrF3');
 
-var send = async function(from_address, to_address, amount, secret) {
+var send = async function(from_address, to_address, amount, from_pvt_key, from_pub_key) {
 
     const payment = {
         source: {
@@ -66,7 +68,8 @@ var send = async function(from_address, to_address, amount, secret) {
         console.log('Connected...');
         return api.preparePayment(from_address, payment, instructions).then(prepared => {
             console.log('Payment transaction prepared...');
-            const { signedTransaction } = api.sign(prepared.txJSON, secret);
+            const keypair = { privateKey: from_pvt_key, publicKey: from_pub_key };
+            const { signedTransaction } = api.sign(prepared.txJSON, keypair);
             console.log('Payment transaction signed...');
             api.submit(signedTransaction).then(quit, fail);
         });
@@ -74,10 +77,9 @@ var send = async function(from_address, to_address, amount, secret) {
 
 }
 
-send('rhzWTrnitp3qcWpHds53e7LAq34hFxpUHo','rspmDusLyumrWGHUTnoXkAXGwFyQhma11X','100','snyWsaFrHhwbXhVcsodm3KxHY1eon').then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err);
-})
 
-
+// send('rDCXVbNixBR9eKcao9NMfRZ4qDF2mGMrF3', 'rhzWTrnitp3qcWpHds53e7LAq34hFxpUHo', '100', 'snyWsaFrHhwbXhVcsodm3KxHY1eon').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
