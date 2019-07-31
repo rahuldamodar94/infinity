@@ -3,14 +3,8 @@ var rp = require('request-promise');
 // StellarBase.Network.usePublicNetwork(); if this transaction is for the public network
 const server = new Stellar.Server('https://horizon-testnet.stellar.org')
 Stellar.Network.useTestNetwork()
-
-// let pairA = Stellar.Keypair.random()
-// let pairB = Stellar.Keypair.random()
-
-// console.log('apub',pairA.publicKey())
-// console.log('asec',pairA.secret())
-// console.log('bpub',pairB.publicKey())
-// console.log('bsec',pairB.secret())
+const XlmProvider = require("xlm-provider").default;
+const xlmProvider = new XlmProvider('testnet');
 
 var test = async function(address) {
     await rp.get({
@@ -26,11 +20,11 @@ var test = async function(address) {
     })
 }
 
-test('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP').then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+// test('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
 
 var balance = async function(publicKey) {
 
@@ -61,7 +55,7 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
         .addOperation(Stellar.Operation.payment({
             destination: receiverPublicKey,
             asset: Stellar.Asset.native(),
-            amount: amount.toFixed(7),
+            amount: (parseFloat(amount)).toFixed(7),
         }))
         .setTimeout(30)
         .build();
@@ -78,3 +72,11 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
         console.log(e.response.data.extras.result_codes);
     }
 }
+
+
+var importPvtKey = function(pvt_key) {
+    const XLMAddress = xlmProvider.createPublicKey(pvt_key);
+    console.log(XLMAddress);
+}
+
+// importPvtKey('SAWMUQDDOLNRLDKYVK3SDJLVROL64PUALWJVEVBVZJXUK4Z2DVPBZZ75');
