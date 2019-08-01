@@ -121,7 +121,7 @@ var getInfo = async function(address) {
 //     console.log(err);
 // })
 
-// getBandwidthAndEnergyInfo('TP82vPzqLohrMWELkHbLhwktAWnpCoP42f').then(res => {
+// getBandwidthAndEnergyInfo('TJPhJceEfR1XDs8Jkmthx22Kmq9z1cn16J').then(res => {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);

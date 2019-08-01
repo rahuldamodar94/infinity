@@ -26,13 +26,13 @@ var balance = function(address) {
         method: 'get',
         url: 'https://chain.so/api/v2/get_address_balance/LTCTEST/' + address + '/0',
     }).then(function(response) {
-        console.log(response.data.data.confirmed_balance);
+        console.log(response.data.data);
     }).catch(err => {
         console.log(err)
     })
 }
 
-// balance('mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y');
+balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx');
 
 var create = async function(pvt_key, account_name) {
 
@@ -45,7 +45,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('cNzG1uxzk2F6y4z4yXHd3yUJDMt6csfmbmwmPKGiouMHsqSu9UnL').then(res => {
+// create('cTrNRHEJ3zm7AzkF2aC7JpuMAT7wrSsM6i8zk5m6MFnpfivFACkq','rahulinfi123').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
@@ -63,11 +63,11 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-// send('vijayragavan_v@nextazy.com','mgASdkKVux7hYtZxkA8dDPcB6DUpbM4XHE','0.01').then(res => {
-//     console.log(res);
-// }).catch(err => {
-//     console.log(err);
-// })
+send('rahulinfi123','mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y','0.01').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
 
 
 var importPvtKey = function(secret_key) {

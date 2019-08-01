@@ -15,6 +15,26 @@ options = {
 
 eos = EosApi(options)
 
+var accountValid = async function(account_name) {
+    try {
+        let res = await eos.getAccount(account_name);
+        if (res) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        return false;
+    }
+}
+
+// accountValid('rahultest321').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+
 const { Api, JsonRpc } = require('eosjs');
 const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig'); // development only
 const { TextEncoder, TextDecoder } = require('util');
@@ -120,6 +140,12 @@ var balance = async function(account_name) {
     return (balance);
 }
 
+// balance('rahultest321').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 var send = async function(from_account, to_account, from_pvt_key, amount) {
 
     var privateKeys = [from_pvt_key];
@@ -160,14 +186,14 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
 }
 
 
-// create('vijaytest321','EOS6rEMUgVqx83ejxtBruPXHLghLj4To3efxcHPhYNtN2kgf517ny').then(res => {
+// create('vijaytest421','EOS5EwrY2ckUA31X7tsmAREbAEbNLLpDjfLzE3tNaPWeebWtdyB9H').then(res => {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);
 // })
 
 
-// send('rahultest321', 'vijaytest123', '5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR', '10').then(res => {
+// send('rahultest321', 'vijaytest421', '5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR', '10').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err)
@@ -203,4 +229,3 @@ var importPvtKey = function(pvt_key) {
 }
 
 // importPvtKey('5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR');
-

@@ -32,7 +32,7 @@ var balance = function(address) {
     })
 }
 
-// balance('mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5');
+// balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx');
 
 
 var create = async function(pvt_key, account_name) {
@@ -69,8 +69,8 @@ var send = async function(from_address, from_pvt_key, to_address, amount) {
 //     console.log(err);
 // })
 
-// send('mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y', 'cPTh5rWSZYGCEpenMZrRzhv8KbdrxtAkfubvxqXTqcPso2zDs1L3', 'mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '0.0001').then(res => {
-//     console.log(res);
+// send('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx', 'cTrNRHEJ3zm7AzkF2aC7JpuMAT7wrSsM6i8zk5m6MFnpfivFACkq', 'mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '0.0001').then(res => {
+//     console.log(res.data.result.error);
 // }).catch(err => {
 //     console.log(err);
 // })
