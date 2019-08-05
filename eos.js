@@ -140,7 +140,7 @@ var balance = async function(account_name) {
     return (balance);
 }
 
-// balance('rahultest321').then(res => {
+// balance('rahultest421').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -185,15 +185,16 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
     return (result);
 }
 
-
-// create('vijaytest421','EOS5EwrY2ckUA31X7tsmAREbAEbNLLpDjfLzE3tNaPWeebWtdyB9H').then(res => {
+// create('prabhatest12','EOS5PuPjDR3pzTpRYjzo8t69YPTibwuQCmPZL5pQViUN3FQtCBAAn').then(res => {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);
 // })
 
 
-// send('rahultest321', 'vijaytest421', '5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR', '10').then(res => {
+// Public Key: EOS6NcGnaWxRB9yRb7eVKMAV1hqDH3qkVNatS9yQuMjdHTokh51An 
+// Private key: 5Kem2ZpN9juwULfSh2A3LTxXie6mpQoN9i1WmfLWao8nojSFMS2
+// send('rahultest421', 'prabhatest12', '5Kem2ZpN9juwULfSh2A3LTxXie6mpQoN9i1WmfLWao8nojSFMS2', '10').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err)

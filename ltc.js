@@ -20,19 +20,21 @@ var generate = function() {
 
 // generate();
 
-var balance = function(address) {
+var balance = async function(account_name) {
 
-    axios({
+    let res = await axios({
         method: 'get',
-        url: 'https://chain.so/api/v2/get_address_balance/LTCTEST/' + address + '/0',
-    }).then(function(response) {
-        console.log(response.data.data.confirmed_balance);
-    }).catch(err => {
-        console.log(err)
+        url: 'http://128.199.44.148:8003/getbalance/' + account_name,
     })
+
+    return res.data;
 }
 
-// balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx');
+// balance('rahul@nextazy.com').then(res => {
+//     console.log(JSON.parse(res.output).result)
+// }).catch(err => {
+//     console.log(err)
+// })
 
 var create = async function(pvt_key, account_name) {
 
@@ -45,7 +47,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('cTrNRHEJ3zm7AzkF2aC7JpuMAT7wrSsM6i8zk5m6MFnpfivFACkq','abc123').then(res => {
+// create('cPqEJoUQ6mu28omWpVCHTa6FqqvRa6vJXAkD2kJkBNRqQ3XJh9YV','edison12354@nextazy.com').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
@@ -63,8 +65,9 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-// send('abc123','mkv1b4Te86xv145cGT3QnLS1UYLkmHu1y','0.01').then(res => {
-//     console.log(res.data);
+// send('rahul@nextazy.com','mvtsZApH7az7JFaEAawaBrjTMnysHATLbM','0.5').then(res => {
+//     let response = JSON.parse(res.data.address);
+//     console.log(response);
 // }).catch(err => {
 //     console.log(err);
 // })
@@ -76,11 +79,11 @@ var importPvtKey = function(secret_key) {
     console.log(address.toString())
 }
 
-
-// importPvtKey('T4w1z71fSEUUA6fX4kdMpsnisPd3ZPcBnRQp7oMacSUxuMzN1n9L');
+// n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx
+// importPvtKey('cTrNRHEJ3zm7AzkF2aC7JpuMAT7wrSsM6i8zk5m6MFnpfivFACkq');
 
 var isValid = function(address) {
     console.log(litecore.Address.isValid(address, litecore.Networks.testnet))
 }
 
-// isValid('mov7DjGJBFgRH6naJQDdEsLyEMWaKsnFWF');
+// isValid('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx');

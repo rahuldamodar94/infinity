@@ -20,19 +20,22 @@ var generate = function() {
 
 // generate();
 
-var balance = function(address) {
+var balance = async function(address) {
 
-    axios({
+    let res = await axios({
         method: 'get',
-        url: 'https://api.blockcypher.com/v1/btc/test3/addrs/' + address + '/balance',
-    }).then(function(response) {
-        console.log(response.data.balance / 100000000);
-    }).catch(err => {
-        console.log(err)
+        url: 'http://68.183.13.235:8003/getbalance/' + address,
     })
+
+    return res.data;
+    
 }
 
-// balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx');
+// balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx').then(res => {
+//     console.log(res.amount);
+// }).catch(err => {
+//     console.log(err);
+// })
 
 
 var create = async function(pvt_key, account_name) {
