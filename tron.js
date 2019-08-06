@@ -7,7 +7,6 @@ var WAValidator = require('multicoin-address-validator');
 
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
-    privateKey: 'F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1'
 })
 
 var importPvtKey = function(pvt_key) {
@@ -112,7 +111,7 @@ var balance = async function(address) {
 var getInfo = async function(address) {
 
     let response = await tronWeb.trx.getAccount(address);
-    console.log(response)
+    return (response)
 }
 
 
@@ -164,8 +163,22 @@ var isValid = function(address) {
 //     console.log(err);
 // })
 
-tronWeb.transactionBuilder.vote({srAddress : 1}, "41928c9af0651632157ef27a2cf17ca72c575a4d21", 1).then(res => {
-    console.log(res);
+// tronWeb.transactionBuilder.vote({srAddress : 1}, "41928c9af0651632157ef27a2cf17ca72c575a4d21", 1).then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+// tronWeb.transactionBuilder.sendTrx("41928c9af0651632157ef27a2cf17ca72c575a4d21",
+//     parseInt(tronWeb.toSun(100)), tronWeb.address.toHex('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV'), 1).then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err)
+// })
+
+
+tronWeb.trx.getTokenByID('1000137').then(res => {
+    console.log(res)
 }).catch(err => {
-    console.log(err);
+    console.log(err)
 })
