@@ -22,7 +22,7 @@ var test = async function(address) {
     })
 }
 
-// test('GDQMB4E7SPDUWZEMWVJWFAFOWFXIT2PJD2BPQOLHN52XVTSABCGOGVMD').then(res => {
+// test('GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -37,6 +37,11 @@ var balance = async function(publicKey) {
     })
 }
 
+// balance('GB5EW3JOSZQ6RLNCTRTOOCE5EXTAZ7B3JIS3XRXJDKO65AT4JO6IBXRW').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
 
 
 var send = async function(source_pvt_key, destination_public_addr, amount) {
@@ -74,6 +79,8 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
         console.log(e.response.data.extras.result_codes);
     }
 }
+
+// send('SBDHM5UM6RRVPSV3T6MF7L6DXR34P7FD4WBX454MZ5UJSJD4DGLQ33PX','GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y','1000')
 
 
 var importPvtKey = function(pvt_key) {
