@@ -151,7 +151,11 @@ var isValid = function(address) {
 // console.log(isValid('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV'));
 
 
-// tronWeb.trx.listSuperRepresentatives().then(res => {
+// trontronWeb.trx.getTokenByID('1000137').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err)
+// })Web.trx.listSuperRepresentatives().then(res => {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);
@@ -177,8 +181,8 @@ var isValid = function(address) {
 // })
 
 
-tronWeb.trx.getTokenByID('1000137').then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err)
-})
+// tronWeb.trx.getTokenByID('1000137').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err)
+// })
