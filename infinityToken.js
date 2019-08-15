@@ -59,3 +59,14 @@ var importPvtKey = function(pvt_key) {
 }
 
 // importPvtKey('F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1');
+
+var checkStatus = async function(txhash) {
+    let res = await tronWeb.trx.getTransaction(txhash);
+    return (res.ret[0].contractRet === 'SUCCESS');
+}
+
+// checkStatus('af53d96cb3c68bda00e7a3b2749a327fe475b0d47c54facce237abb25a595073').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })

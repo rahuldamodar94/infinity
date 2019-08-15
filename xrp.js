@@ -8,6 +8,21 @@ var WAValidator = require('wallet-address-validator');
 
 
 const api = new RippleAPI({ server: 'wss://s.altnet.rippletest.net:51233' });
+
+
+
+var checkStatus = async function(txhash) {
+    let connect = await api.connect();
+    let res = await api.getTransaction(txhash);
+    return (res.outcome.result === 'tesSUCCESS');
+}
+
+// checkStatus('AB6248AA0D9046160ED642F108BBC2C6F9755BF181885B68529C4EB2CF89F915').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 const instructions = { maxLedgerVersionOffset: 5 };
 
 var generate = function() {
@@ -95,6 +110,8 @@ var importPvtKey = function(secret) {
 // }).catch(err => {
 //     console.log(err);
 // })
+
+//AB6248AA0D9046160ED642F108BBC2C6F9755BF181885B68529C4EB2CF89F915
 
 
 var isValid = function(address) {

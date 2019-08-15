@@ -28,7 +28,8 @@ async function triggercontract(){
 }
 
  triggercontract().then(res => {
- 	console.log(res);
+ 	// console.log(res);
+  res[0].toString();
  }).catch(err => {
  	console.log(err);
  })
@@ -41,13 +42,13 @@ async function triggercontract2(){
     callValue:0,
     shouldPollResponse: true
   }
-  let result  = await contractInstance.create('1',1,'3433433','343343434','USDT','BTC','0.2','0.5','0.1','10','56','TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf','TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf','sell').send(args);
+  let result  = await contractInstance.create('1',301,'3433433','343343434','USDT','BTC','0.2','0.5','0.1','10','56','TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf','TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf','sell').send(args);
 
   return result;
 }
 
-/*triggercontract2().then(res => {
-	console.log(res);
-}).catch(err => {
-	console.log(err);
-})*/
+// triggercontract2().then(res => {
+// 	console.log(res);
+// }).catch(err => {
+// 	console.log(err);
+// })

@@ -2,7 +2,7 @@ const TronWeb = require('tronweb');
 const axios = require('axios')
 const bip39 = require('bip39');
 const hdkey = require('hdkey');
-let { HdTronPayments } = require('@faast/tron-payments')
+// let { HdTronPayments } = require('@faast/tron-payments')
 var WAValidator = require('multicoin-address-validator');
 
 const tronWeb = new TronWeb({
@@ -13,30 +13,30 @@ var importPvtKey = function(pvt_key) {
     console.log(tronWeb.address.fromPrivateKey(pvt_key));
 }
 
-let tronAddressGenerate = async function() {
-    const mnemonic = bip39.generateMnemonic();
-    const seed = bip39.mnemonicToSeed(mnemonic);
-    const root = hdkey.fromMasterSeed(seed);
-    const masterPrivateKey = root.privateKey.toString('hex');
-    const addrNode = root.derive("m/44'/195'/0'/0/0");
-    let tronPayments = new HdTronPayments({ hdKey: (addrNode.toJSON()).xpriv })
-    let depositAddress = await tronPayments.getAddress(0)
-    let privateKey = await tronPayments.getPrivateKey(0)
-    console.log(privateKey)
-    console.log(depositAddress)
-    return mnemonic;
-}
+// let tronAddressGenerate = async function() {
+//     const mnemonic = bip39.generateMnemonic();
+//     const seed = bip39.mnemonicToSeed(mnemonic);
+//     const root = hdkey.fromMasterSeed(seed);
+//     const masterPrivateKey = root.privateKey.toString('hex');
+//     const addrNode = root.derive("m/44'/195'/0'/0/0");
+//     let tronPayments = new HdTronPayments({ hdKey: (addrNode.toJSON()).xpriv })
+//     let depositAddress = await tronPayments.getAddress(0)
+//     let privateKey = await tronPayments.getPrivateKey(0)
+//     console.log(privateKey)
+//     console.log(depositAddress)
+//     return mnemonic;
+// }
 
-let tronAddressRetrieve = async function(mnemonic) {
-    const seed = bip39.mnemonicToSeed(mnemonic);
-    const root = hdkey.fromMasterSeed(seed);
-    const masterPrivateKey = root.privateKey.toString('hex');
-    const addrNode = root.derive("m/44'/195'/0'/0/0");
-    let tronPayments = new HdTronPayments({ hdKey: (addrNode.toJSON()).xpriv })
-    let depositAddress = await tronPayments.getAddress(0)
-    let privateKey = await tronPayments.getPrivateKey(0)
-    return privateKey;
-}
+// let tronAddressRetrieve = async function(mnemonic) {
+//     const seed = bip39.mnemonicToSeed(mnemonic);
+//     const root = hdkey.fromMasterSeed(seed);
+//     const masterPrivateKey = root.privateKey.toString('hex');
+//     const addrNode = root.derive("m/44'/195'/0'/0/0");
+//     let tronPayments = new HdTronPayments({ hdKey: (addrNode.toJSON()).xpriv })
+//     let depositAddress = await tronPayments.getAddress(0)
+//     let privateKey = await tronPayments.getPrivateKey(0)
+//     return privateKey;
+// }
 
 var freeze = async function(address, pvt_key, amount, duration, type) {
 
@@ -191,14 +191,13 @@ var isValid = function(address) {
 //     console.log(err)
 // })
 
-tronWeb.trx.getTransaction("44e42e6f9866dce0d1bcd3815efead447db8552b9b317cc33fed85db5131d3c1").then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+var checkStatus = async function(txhash) {
+    let res = await tronWeb.trx.getTransaction(txhash);
+    return (res.ret[0].contractRet === 'SUCCESS');
+}
 
-tronWeb.trx.getTransactionInfo("44e42e6f9866dce0d1bcd3815efead447db8552b9b317cc33fed85db5131d3c1").then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+// checkStatus('af53d96cb3c68bda00e7a3b2749a327fe475b0d47c54facce237abb25a595073').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })

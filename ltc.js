@@ -30,7 +30,7 @@ var balance = async function(account_name) {
     return res.data;
 }
 
-// balance('rahul@nextazy.com').then(res => {
+// balance('msMDdbv9CH43R2oZZoyuAR1utZv2nmivgb').then(res => {
 //     console.log(JSON.parse(res.output).result)
 // }).catch(err => {
 //     console.log(err)
@@ -47,7 +47,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('cPqEJoUQ6mu28omWpVCHTa6FqqvRa6vJXAkD2kJkBNRqQ3XJh9YV','edison12354@nextazy.com').then(res => {
+// create('cSiccB6RpcJM4KhaEtdb8RgqGHjdwDsTe8WsM9zEkNu2j4iPmFGX','msMDdbv9CH43R2oZZoyuAR1utZv2nmivgb').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
