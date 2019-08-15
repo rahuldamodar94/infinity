@@ -2,7 +2,6 @@ var Stellar = require('stellar-sdk');
 var rp = require('request-promise');
 // StellarBase.Network.usePublicNetwork(); if this transaction is for the public network
 const server = new Stellar.Server('https://horizon-testnet.stellar.org')
-Stellar.Network.useTestNetwork()
 const XlmProvider = require("xlm-provider").default;
 const xlmProvider = new XlmProvider('testnet');
 
@@ -22,7 +21,7 @@ var test = async function(address) {
     })
 }
 
-// test('GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y').then(res => {
+// test('GDW5BBLFQVWZYLDJDQFT35CIQCHQ2S2CGEX4IRAROP4DNDUBSKYSAOHL').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -37,7 +36,7 @@ var balance = async function(publicKey) {
     })
 }
 
-// balance('GB5EW3JOSZQ6RLNCTRTOOCE5EXTAZ7B3JIS3XRXJDKO65AT4JO6IBXRW').then(res => {
+// balance('GDW5BBLFQVWZYLDJDQFT35CIQCHQ2S2CGEX4IRAROP4DNDUBSKYSAOHL').then(res => {
 //     console.log(res)
 // }).catch(err => {
 //     console.log(err);
@@ -58,7 +57,7 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
 
     const fee = await server.fetchBaseFee();
 
-    const transaction = new Stellar.TransactionBuilder(account, { fee })
+    const transaction = new Stellar.TransactionBuilder(account, { fee , networkPassphrase: Stellar.Networks.TESTNET})
         .addOperation(Stellar.Operation.payment({
             destination: receiverPublicKey,
             asset: Stellar.Asset.native(),
@@ -80,7 +79,11 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
     }
 }
 
-// send('SBDHM5UM6RRVPSV3T6MF7L6DXR34P7FD4WBX454MZ5UJSJD4DGLQ33PX','GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y','1000')
+send('SCKLY5ZKHJULHGILX7CVJAZIYPYUXA45MQPVGXWAP6OPW7FNZ5BTYDHC','GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y','1000').then(res => {
+    console.log(res)
+}).catch(err => {
+    console.log(err)
+})
 
 
 var importPvtKey = function(pvt_key) {
@@ -88,7 +91,7 @@ var importPvtKey = function(pvt_key) {
     console.log(XLMAddress);
 }
 
-// importPvtKey('SAWMUQDDOLNRLDKYVK3SDJLVROL64PUALWJVEVBVZJXUK4Z2DVPBZZ75');
+// importPvtKey('SCKLY5ZKHJULHGILX7CVJAZIYPYUXA45MQPVGXWAP6OPW7FNZ5BTYDHC');
 
 
 var isValid = function(address) {

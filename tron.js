@@ -89,20 +89,25 @@ var getBandwidthAndEnergyInfo = async function(address) {
 }
 
 var send = async function(from_pvt_key, to_address, amount) {
-    tronWeb.trx.sendTransaction(tronWeb.address.toHex(to_address),
-        parseInt(tronWeb.toSun(amount)), from_pvt_key).then(res => {
-        console.log(res);
-    }).catch(err => {
-        console.log(err.message)
-    })
+    let res = await tronWeb.trx.sendTransaction(tronWeb.address.toHex(to_address),
+        parseInt(tronWeb.toSun(amount)), from_pvt_key);
+
+    return res;
 }
+
+
+// send('F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1', 'TAHfJybMZuDZ1Cv7pyzad9G4AXufjMKfb2', 100).then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
 
 var balance = async function(address) {
     const userBalance = await tronWeb.trx.getBalance(tronWeb.address.toHex(address));
     console.log(`User's balance is: ${ userBalance/1000000 }`);
 };
 
-// balance('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV').then(res => {
+// balance('TQot8srUUiaAaJAhAFddSwNQVM3JF1UtNU').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err)
@@ -150,7 +155,6 @@ var isValid = function(address) {
 
 // console.log(isValid('TQMfW11u15HnkbsYYrMyyMDsqidGjZTSKV'));
 
-
 // trontronWeb.trx.getTokenByID('1000137').then(res => {
 //     console.log(res)
 // }).catch(err => {
@@ -186,3 +190,15 @@ var isValid = function(address) {
 // }).catch(err => {
 //     console.log(err)
 // })
+
+tronWeb.trx.getTransaction("44e42e6f9866dce0d1bcd3815efead447db8552b9b317cc33fed85db5131d3c1").then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
+
+tronWeb.trx.getTransactionInfo("44e42e6f9866dce0d1bcd3815efead447db8552b9b317cc33fed85db5131d3c1").then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})

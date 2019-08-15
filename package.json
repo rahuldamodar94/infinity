@@ -37,7 +37,7 @@
     "ripple-keypairs": "^0.11.0",
     "ripple-lib": "^1.2.4",
     "ripplelib": "^1.2.5",
-    "stellar-sdk": "^2.1.0",
+    "stellar-sdk": "^2.2.3",
     "string_decoder": "^1.2.0",
     "tronweb": "^2.6.6",
     "wallet-address-validator": "^0.2.4",
