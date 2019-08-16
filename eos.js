@@ -28,6 +28,14 @@ var accountValid = async function(account_name) {
     }
 }
 
+var axios = require("axios");
+
+// eos.getTransaction('35b518fe41b5897b2b499b818ebde9cb6f4df9cc0ee245e272e74fb5830b0b4e',44613750).then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 // accountValid('rahultest321').then(res => {
 //     console.log(res);
 // }).catch(err => {

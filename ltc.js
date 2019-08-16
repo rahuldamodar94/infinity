@@ -30,6 +30,23 @@ var balance = async function(account_name) {
     return res.data;
 }
 
+var checkStatus = async function(txHash) {
+
+    let res = await axios({
+        method: 'get',
+        url: 'http://128.199.44.148:8004/gettransaction/' + txHash,
+    })
+
+    return (res.data.output.result.confirmations > 6);
+
+}
+
+// checkStatus('89282fb43ba0f70d1acde7a8d689822d22755c2724bf34306cda5e54ae0fa15a').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 // balance('msMDdbv9CH43R2oZZoyuAR1utZv2nmivgb').then(res => {
 //     console.log(JSON.parse(res.output).result)
 // }).catch(err => {
@@ -65,7 +82,7 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-// send('rahul@nextazy.com','mvtsZApH7az7JFaEAawaBrjTMnysHATLbM','0.5').then(res => {
+// send('rahul@nextazy.com','mvtsZApH7az7JFaEAawaBrjTMnysHATLbM','0.001').then(res => {
 //     let response = JSON.parse(res.data.address);
 //     console.log(response);
 // }).catch(err => {

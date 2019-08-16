@@ -18,7 +18,7 @@ var generate = function() {
     console.log(pvtkey.toWIF());
 }
 
-generate();
+// generate();
 
 var balance = async function(address) {
 
@@ -28,8 +28,26 @@ var balance = async function(address) {
     })
 
     return res.data;
-    
+
 }
+
+var checkStatus = async function(txHash) {
+
+    let res = await axios({
+        method: 'get',
+        url: 'http://68.183.13.235:8004/gettransaction/' + txHash,
+    })
+
+    return (res.data.output.result.confirmatios > 6);
+
+}
+
+// checkStatus('bc30dd33d751f4c7052be632ce69e29705307d9d7f7922b769e261656db7de6c').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 
 // balance('n19ThvXhrTSQ9cRaX4dFq9q1viWgBc9qUx').then(res => {
 //     console.log(res.amount);

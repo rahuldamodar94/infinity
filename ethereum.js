@@ -80,8 +80,21 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
 //     console.log(err)
 // })
 
-var isValid = function(address) {
-    console.log(web3.utils.isAddress(address));
+
+var checkStatus = async function(txHash) {
+    let res = await web3.eth.getTransactionReceipt(txHash);
+    return res.status;
 }
+
+// checkStatus('0x8f274f5f6bba5ca04d303163b4189ed4d51c9d1816981bdd22b60b291f841152').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+
+// var isValid = function(address) {
+//     console.log(web3.utils.isAddress(address));
+// }
 
 // isValid('0xE5c926c8d3769BB99310D8F423CF699fAC45DA75');

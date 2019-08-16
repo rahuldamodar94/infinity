@@ -36,7 +36,22 @@ var balance = async function(address) {
 // }).catch(err => {
 //     console.log(err);
 // })
+var checkStatus = async function(txHash) {
 
+    let res = await axios({
+        method: 'get',
+        url: 'http://68.183.3.239:8004/gettransaction/' + txHash,
+    })
+
+    return (res.data);
+
+}
+
+// checkStatus('fcf6b36aded0aadea83eb4435008a0cfa2ef9a9b6316b4aa1e3c36bd16f1c9e5').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
 
 var create = async function(pvt_key, account_name) {
 
@@ -49,7 +64,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('cPtrDaxR3Mjh1HKVL4YuwN7PEgdqZ93y1PapZqotCjy8NY2F8eBF','vijay12').then(res => {
+// create('Ky6hcwWb8UZw5PBWyA3JdPR4hNLTJS54bsTTrR4xLVjsYHrzR7Vs','16Q4J11Uq6fi8taTthUfas879Uwdoqeezx').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
