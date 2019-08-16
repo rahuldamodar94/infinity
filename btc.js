@@ -7,7 +7,7 @@ var generate = function() {
 
     bitcore.Networks.defaultNetwork = bitcore.Networks.mainnet;
     const mnemonic = bip39.generateMnemonic()
-    var value = Buffer.from('opinion repair knock receive legal debate snack remain such stone trash awkward');
+    var value = Buffer.from(mnemonic);
     var hash = bitcore.crypto.Hash.sha256(value);
     var bn = bitcore.crypto.BN.fromBuffer(hash);
     var address = new bitcore.PrivateKey(bn).toAddress();
@@ -18,7 +18,7 @@ var generate = function() {
     console.log(pvtkey.toWIF());
 }
 
-// generate();
+generate();
 
 var balance = async function(address) {
 

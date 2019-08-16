@@ -27,7 +27,7 @@ var balance = async function(address) {
         url: 'http://68.183.3.239:8003/getusdtbalance/' + address,
     })
 
-    return res.data.output.result.balance;
+    return res.data;
     
 }
 
@@ -36,6 +36,7 @@ var balance = async function(address) {
 // }).catch(err => {
 //     console.log(err);
 // })
+
 var checkStatus = async function(txHash) {
 
     let res = await axios({
@@ -64,7 +65,7 @@ var create = async function(pvt_key, account_name) {
 
 }
 
-// create('Ky6hcwWb8UZw5PBWyA3JdPR4hNLTJS54bsTTrR4xLVjsYHrzR7Vs','16Q4J11Uq6fi8taTthUfas879Uwdoqeezx').then(res => {
+// create('KzxoEt81U3aFL5FcYWEw5DzjysdM3pd21ybGfSbDgJd24uNkF2zS','12fxCusA8MaPt4MCUVDNUhaEeJznzmv4hU').then(res => {
 //     console.log(res.data);
 // }).catch(err => {
 //     console.log(err);
@@ -77,11 +78,11 @@ var send = async function(from_address, to_address, amount) {
         url: 'http://68.183.3.239:8000/sendusdtcoin/' + from_address + '-' + to_address + '-' + amount,
     })
 
-    return res;
+    return res.data;
 
 }
 
-// send('mziK54h45SkxL2UGHQ7mUQVM7QQ51RmWP5', '921Xy8dB8iK4mHJFist9Whciz2MSXmMAPkDRJUx9Ad13wTGeFw4', 'mkv1b46Te86xv145cGT3QnLS1UYLkmHu1y', '0.000001').then(res => {
+// send('12fxCusA8MaPt4MCUVDNUhaEeJznzmv4hU', '16Wm2GM4XaE4oJ52hNVEb3Y8Q1UuW61Kbg', '0.001').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
