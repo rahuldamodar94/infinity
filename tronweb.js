@@ -79,7 +79,7 @@ async function triggercontract2() {
         callValue: 0,
         shouldPollResponse: true
     }
-    let result = await contractInstance.create('1', 301, '3433433', '343343434', 'USDT', 'BTC', '0.2', '0.5', '0.1', '10', '56', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'sell').send(args);
+    let result = await contractInstance.create('2', '301', '3433433', '343343434', 'USDT', 'BTC', '0.2', '0.5', '0.1', '10', '56', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'sell').send(args);
 
     return result;
 }
