@@ -24,6 +24,7 @@ eos = EosApi(options)
 var accountValid = async function(account_name) {
     try {
         let res = await eos.getAccount(account_name);
+        console.log(res.permissions[0].required_auth.keys);
         if (res) {
             return true;
         } else {
@@ -42,11 +43,11 @@ var axios = require("axios");
 //     console.log(err);
 // })
 
-// accountValid('rahuldemo123').then(res => {
-//     console.log(res);
-// }).catch(err => {
-//     console.log(err);
-// })
+accountValid('rahuldemo123').then(res => {
+    console.log(res);
+}).catch(err => {
+    console.log(err);
+})
 
 
 const { Api, JsonRpc } = require('eosjs');
@@ -199,16 +200,16 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
     return (result);
 }
 
-create('naveeninfi12','EOS8Bgq6uvbDbQRro9D1GgUFGYqnM7dNHKKzejb6wgQKZjL5jEQuS').then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err);
-})
+// create('naveeninfi12','EOS8Bgq6uvbDbQRro9D1GgUFGYqnM7dNHKKzejb6wgQKZjL5jEQuS').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err);
+// })
 
 
 // Public Key: EOS6NcGnaWxRB9yRb7eVKMAV1hqDH3qkVNatS9yQuMjdHTokh51An 
 // Private key: 5Kem2ZpN9juwULfSh2A3LTxXie6mpQoN9i1WmfLWao8nojSFMS2
-// send('rahultest421', 'prabhatest12', '5Kem2ZpN9juwULfSh2A3LTxXie6mpQoN9i1WmfLWao8nojSFMS2', '10').then(res => {
+// send('rahuldemo123', 'naveeninfi12', '5KZFNC6sKE7doaUypRg9rBpt6D2FYG8ydLC4NtiK2PZe3yTkDVb', '10').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err)

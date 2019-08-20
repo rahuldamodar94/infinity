@@ -18,7 +18,7 @@ var generate = function() {
     console.log(pvtkey.toWIF());
 }
 
-generate();
+// generate();
 
 var balance = async function(address) {
 
