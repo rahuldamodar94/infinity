@@ -42,7 +42,7 @@ var axios = require("axios");
 //     console.log(err);
 // })
 
-// accountValid('rahultest321').then(res => {
+// accountValid('rahuldemo123').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
@@ -64,7 +64,7 @@ var generate = function() {
 
 var create = async function(account_name, address) {
 
-    var privateKeys = ['5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR'];
+    var privateKeys = ['5KZFNC6sKE7doaUypRg9rBpt6D2FYG8ydLC4NtiK2PZe3yTkDVb'];
 
     var signatureProvider = new JsSignatureProvider(privateKeys);
 
@@ -84,11 +84,11 @@ var create = async function(account_name, address) {
                 account: 'eosio',
                 name: 'newaccount',
                 authorization: [{
-                    actor: 'rahultest321',
+                    actor: 'rahuldemo123',
                     permission: 'active',
                 }, ],
                 data: {
-                    creator: 'rahultest321',
+                    creator: 'rahuldemo123',
                     name: account_name,
                     owner: {
                         threshold: 1,
@@ -114,11 +114,11 @@ var create = async function(account_name, address) {
                 account: 'eosio',
                 name: 'buyrambytes',
                 authorization: [{
-                    actor: 'rahultest321',
+                    actor: 'rahuldemo123',
                     permission: 'active',
                 }, ],
                 data: {
-                    payer: 'rahultest321',
+                    payer: 'rahuldemo123',
                     receiver: account_name,
                     bytes: 8192,
                 },
@@ -127,11 +127,11 @@ var create = async function(account_name, address) {
                 account: 'eosio',
                 name: 'delegatebw',
                 authorization: [{
-                    actor: 'rahultest321',
+                    actor: 'rahuldemo123',
                     permission: 'active',
                 }, ],
                 data: {
-                    from: 'rahultest321',
+                    from: 'rahuldemo123',
                     receiver: account_name,
                     stake_net_quantity: '0.0001 EOS',
                     stake_cpu_quantity: '0.0001 EOS',
@@ -199,11 +199,11 @@ var send = async function(from_account, to_account, from_pvt_key, amount) {
     return (result);
 }
 
-// create('lionelinfi12','EOS5VW6bVmfniWGm1VLha5H2NZTZfZ5n5Qtzmv4aB7rfPTB1gRYxJ').then(res => {
-//     console.log(res)
-// }).catch(err => {
-//     console.log(err);
-// })
+create('naveeninfi12','EOS8Bgq6uvbDbQRro9D1GgUFGYqnM7dNHKKzejb6wgQKZjL5jEQuS').then(res => {
+    console.log(res)
+}).catch(err => {
+    console.log(err);
+})
 
 
 // Public Key: EOS6NcGnaWxRB9yRb7eVKMAV1hqDH3qkVNatS9yQuMjdHTokh51An 
