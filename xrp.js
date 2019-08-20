@@ -46,11 +46,13 @@ var balance = function(address) {
         api.getBalances(address).then(balances => {
             console.log(balances[0].value);
             process.exit();
-        });
+        }).catch(err => {
+            console.log(err);
+        })
     });
 }
 
-// balance('rspmDusLyumrWGHUTnoXkAXGwFyQhma11X');
+// balance('rUAg69nuBngu9RZSfjU82qDsFtPxhhANrD');
 
 var send = async function(from_address, to_address, amount, from_pvt_key, from_pub_key) {
 

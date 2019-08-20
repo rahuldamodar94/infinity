@@ -27,11 +27,11 @@ let tronAddressGenerate = async function() {
     return mnemonic;
 }
 
-tronAddressGenerate().then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err)
-})
+// tronAddressGenerate().then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err)
+// })
 
 let tronAddressRetrieve = async function(mnemonic) {
     const seed = bip39.mnemonicToSeed(mnemonic);
@@ -203,6 +203,12 @@ var checkStatus = async function(txhash) {
 }
 
 // checkStatus('af53d96cb3c68bda00e7a3b2749a327fe475b0d47c54facce237abb25a595073').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+// tronWeb.trx.getAccount("TMJ8pxNMRpQBjKaz2D5q7QEDNomjDfFKDJ").then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
