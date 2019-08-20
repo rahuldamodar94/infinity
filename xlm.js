@@ -6,7 +6,7 @@ const XlmProvider = require("xlm-provider").default;
 const xlmProvider = new XlmProvider('testnet');
 
 var WAValidator = require('multicoin-address-validator');
- 
+
 var test = async function(address) {
     await rp.get({
         uri: 'https://horizon-testnet.stellar.org/friendbot',
@@ -57,7 +57,7 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
 
     const fee = await server.fetchBaseFee();
 
-    const transaction = new Stellar.TransactionBuilder(account, { fee , networkPassphrase: Stellar.Networks.TESTNET})
+    const transaction = new Stellar.TransactionBuilder(account, { fee, networkPassphrase: Stellar.Networks.TESTNET })
         .addOperation(Stellar.Operation.payment({
             destination: receiverPublicKey,
             asset: Stellar.Asset.native(),
@@ -79,11 +79,11 @@ var send = async function(source_pvt_key, destination_public_addr, amount) {
     }
 }
 
-send('SCKLY5ZKHJULHGILX7CVJAZIYPYUXA45MQPVGXWAP6OPW7FNZ5BTYDHC','GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y','1000').then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err)
-})
+// send('SCKLY5ZKHJULHGILX7CVJAZIYPYUXA45MQPVGXWAP6OPW7FNZ5BTYDHC', 'GDEF5T5XSTHWUDIT4E3XKS3I6EEEUNTGCGENGYUJXAZ7YBHCNXB7S65Y', '1000').then(res => {
+//     console.log(res)
+// }).catch(err => {
+//     console.log(err)
+// })
 
 
 var importPvtKey = function(pvt_key) {
@@ -104,3 +104,15 @@ var isValid = function(address) {
 }
 
 // console.log(isValid('GDXI2S4CJOA5MWOUV2TIGYLG6VPB4XAVAZ5D5GK6CYEVGJHTSOR2ACHP'));
+
+var checkStatus = async function(txHash) {
+
+    let transactionResult = await server.transactions().transaction(txHash).call();
+    return (transactionResult.successful);
+}
+
+// checkStatus('89bc2b39dcb0b763e72542ec1868e8878d48a4360392185ea5d8ab7a587186c1').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })

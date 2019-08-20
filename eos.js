@@ -15,6 +15,12 @@ options = {
 
 eos = EosApi(options)
 
+// eos.getTransaction('bb49dc5a78dd0c352c25cc3a8157edcc4b7158cd17b1f5fe9cf13693ab2a68bb', 0).then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
 var accountValid = async function(account_name) {
     try {
         let res = await eos.getAccount(account_name);
@@ -238,3 +244,24 @@ var importPvtKey = function(pvt_key) {
 }
 
 // importPvtKey('5JZC2hp6EdZwPvTTbA6jiYbrGWD1GXGBPNynUcdLsjkVHvW9cVR');
+
+
+var checkStatus = async function(txHash, blockNum) {
+
+    let res = await axios({
+        method: 'get',
+        url: 'https://jungle2.cryptolions.io:443/v1/history/get_transaction',
+        data: {
+            id: txHash,
+            block_num_hint: blockNum
+        }
+    })
+
+    return res.data;
+}
+
+// checkStatus('bb49dc5a78dd0c352c25cc3a8157edcc4b7158cd17b1f5fe9cf13693ab2a68bb', '45301852').then(res => {
+//     console.log(res.last_irreversible_block > res.block_num);
+// }).catch(err => {
+//     console.log(err.response.data.error);
+// })
