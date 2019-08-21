@@ -4,9 +4,17 @@ const client = Binance()
 
 //BINANCES CANDLES
 
-client.candles({ symbol: 'LTCUSDT', interval: '1M' }).then(res => {
-    let last_tick = res[res.length - 1];
-    console.log(last_tick);
+client.candles({ symbol: 'BTCUSDT', interval: '1d', limit: '30' }).then(res => {
+    let final = [];
+    for (data of res) {
+        let temp = {
+            high: data.high,
+            low: data.low,
+        }
+        final.push(temp);
+    }
+
+    console.log(final);
 }).catch(err => {
     console.log(err);
 })
@@ -14,18 +22,18 @@ client.candles({ symbol: 'LTCUSDT', interval: '1M' }).then(res => {
 
 //BINANCE PRICES
 
-client.prices().then(res => {
-    let prices = {
-        BTC: res['XRPUSDT'],
-        LTC: res['LTCUSDT'],
-        ETH: res['ETHUSDT'],
-        XRP: res['XRPUSDT'],
-        TRX: res['TRXUSDT'],
-        EOS: res['EOSUSDT'],
-        XLM: res['XLMUSDT']
-    }
+// client.prices().then(res => {
+//     let prices = {
+//         BTC: res['XRPUSDT'],
+//         LTC: res['LTCUSDT'],
+//         ETH: res['ETHUSDT'],
+//         XRP: res['XRPUSDT'],
+//         TRX: res['TRXUSDT'],
+//         EOS: res['EOSUSDT'],
+//         XLM: res['XLMUSDT']
+//     }
 
-    console.log(prices);
-}).catch(err => {
-    console.log(err);
-})
+//     console.log(prices);
+// }).catch(err => {
+//     console.log(err);
+// })
