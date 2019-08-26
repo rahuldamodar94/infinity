@@ -111,3 +111,18 @@ var isValid = function(address) {
 }
 
 // isValid('mftEkAxpiGYuWpgqT58Lqm5y4yMzFrdTgY');
+
+var getFees = async function(account_name, to_address, amount) {
+
+    let res = await axios({
+        method: 'get',
+        url: 'http://68.183.13.235:8006/getfee',
+    })
+
+    return res.data;
+
+}
+
+// getFees().then(res => {
+//     console.log(res.output.result.feerate);
+// })

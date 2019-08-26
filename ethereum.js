@@ -99,6 +99,6 @@ var checkStatus = async function(txHash) {
 
 // isValid('0xE5c926c8d3769BB99310D8F423CF699fAC45DA75');
 
-// var getFees = function() {
-//     return 0.00021;
-// }
+var getFees = function() {
+    return 0.00021;
+}
