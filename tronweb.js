@@ -2,7 +2,7 @@ const TronWeb = require('tronweb');
 
 const tronWeb = new TronWeb({
     fullHost: 'https://api.shasta.trongrid.io/',
-    privateKey: 'c5329a2b899a30f1603ada22732febd3f63f095581c83bccaf3d31df5c280154'
+    privateKey: 'F69C12C65B027FCE8AFBC3AC67F8E111E7E6C49DA392DF4FAAEA8E2B32E0D9D1'
 })
 
 async function getContract() {
@@ -79,13 +79,13 @@ async function triggercontract2() {
         callValue: 0,
         shouldPollResponse: true
     }
-    let result = await contractInstance.create('2', '301', '3433433', '343343434', 'USDT', 'BTC', '0.2', '0.5', '0.1', '10', '56', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'sell').send(args);
+    let result = await contractInstance.create('2', '30', '3', '3433', 'USDT', 'BTC', '0.2334', '0.5', '0.1', '10', '56', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'TEwbscPMyadgq5oAK7NsdPQTXBSUtLnnwf', 'SELL').send(args);
 
     return result;
 }
 
-// triggercontract2().then(res => {
-//  console.log(res);
-// }).catch(err => {
-//  console.log(err);
-// })
+triggercontract2().then(res => {
+ console.log(res);
+}).catch(err => {
+ console.log(err);
+})

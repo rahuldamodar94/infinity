@@ -82,7 +82,7 @@ var send = async function(account_name, to_address, amount) {
 
 }
 
-// send('rahul@nextazy.com','mvtsZApH7az7JFaEAawaBrjTMnysHATLbM','0.001').then(res => {
+// send('msMDdbv9CH43R2oZZoyuAR1utZv2nmivgb','ms2u4YGrSGFEC8uY3q4w1VmqrWB1AybuFB','0.35').then(res => {
 //     let response = JSON.parse(res.data.address);
 //     console.log(response);
 // }).catch(err => {

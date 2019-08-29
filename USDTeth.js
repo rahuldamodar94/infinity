@@ -29,7 +29,7 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
     const privateKey = Buffer.from(privateKeys, 'hex');
 
     let account2 = to_address;
-    let value = amount * 1000000;
+    let value = amount * 1000000 + '';
 
     web3.eth.getTransactionCount(account, (err, txCount) => {
 
@@ -39,7 +39,7 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
             gasLimit: web3.utils.toHex(1000000),
             gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
             to: contractAddress,
-            data: contractInstance.methods.transfer(account2, amount).encodeABI()
+            data: contractInstance.methods.transfer(account2, value).encodeABI()
         }
 
         const tx = new Tx(txObject)
@@ -58,8 +58,8 @@ var send = async function(from_address, to_address, from_pvt_key, amount) {
 
 }
 
-// send('0xFD91a38B6F15c3Ce9F099ec418fDe23800bB9B23','0x083bD5a4e17ABFA478F366A12CCC95966236C490','AA4B3CB56EA14A57121CD287D17BCC227DCB9C2291F03B70056E1F70115B46EF',1).then(res => {
-//     // console.log(res);
-// }).catch(err => {
-//     console.log(err)
-// })
+send('0xFD91a38B6F15c3Ce9F099ec418fDe23800bB9B23','0x1cde7a49371b0f72df9571a8d3481169ca31bb84','AA4B3CB56EA14A57121CD287D17BCC227DCB9C2291F03B70056E1F70115B46EF',10).then(res => {
+    // console.log(res);
+}).catch(err => {
+    console.log(err)
+})
