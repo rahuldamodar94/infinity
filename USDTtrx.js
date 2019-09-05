@@ -6,7 +6,7 @@ const tronWeb = new TronWeb({
 })
 
 async function balance(address) {
-    let contractInstance = await tronWeb.contract().at('TNFHQFDf6o3hKTsMvoE19ZMNRepS5rUttr');
+    let contractInstance = await tronWeb.contract().at('TTvszWPrPvBMa5ybqr6JvBzwiB7MGLhz6n');
 
     let args = {
         callValue: 0,
@@ -23,19 +23,21 @@ async function balance(address) {
 //     console.log(err);
 // })
 
-async function send(address, amount) {
-    let contractInstance = await tronWeb.contract().at('TNFHQFDf6o3hKTsMvoE19ZMNRepS5rUttr');
+async function send(to, amount) {
+    let contractInstance = await tronWeb.contract().at('TTvszWPrPvBMa5ybqr6JvBzwiB7MGLhz6n');
 
     let args = {
         callValue: 0,
+        fee: 100,
         shouldPollResponse: true
     }
-    let result = await contractInstance.transfer(address, amount).send(args);
+
+    let result = await contractInstance.transfer(to, amount).send();
 
     return result;
 }
 
-// send('TAHfJybMZuDZ1Cv7pyzad9G4AXufjMKfb2', '100000000').then(res => {
+// send('TAHfJybMZuDZ1Cv7pyzad9G4AXufjMKfb2', '3000000').then(res => {
 //     console.log(res);
 // }).catch(err => {
 //     console.log(err);
